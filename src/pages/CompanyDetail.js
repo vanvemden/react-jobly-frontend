@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import JoblyApi from "./JoblyApi";
-import JobListItem from "./JobListItem";
+import JoblyApi from "../common/JoblyApi";
+import JobListItem from "../common/JobListItem";
 
 function CompanyDetail() {
   const [company, setCompany] = useState({ jobs: [] });
@@ -14,11 +14,11 @@ function CompanyDetail() {
       setCompany(res);
     }
     fetchCompany(handle);
-  });
+  }, [handle]);
 
   return (
     <div className="CompanyDetail">
-      <h5 class="text-capitalize">{company.name}</h5>
+      <h5 className="text-capitalize">{company.name}</h5>
       <p>{company.description}</p>
       <ul>
         {company.jobs.map(j => <li><JobListItem {...j} /></li>)}

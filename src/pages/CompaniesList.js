@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import CompanyListItem from "./CompanyListItem";
-import SearchForm from "./SearchForm";
-import JoblyApi from "./JoblyApi";
+import CompanyListItem from "../common/CompanyListItem";
+import SearchForm from "../common/SearchForm";
+import JoblyApi from "../common/JoblyApi";
 
 function CompanyList() {
   const [searchTerm, setSearchTerm] = useState();

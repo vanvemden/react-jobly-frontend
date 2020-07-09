@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import UserAuthContext from "./UserAuthContext";
+import UserAuthContext from "../common/UserAuthContext";
 import Alert from "react-bootstrap/Alert";
 
 const INITIAL_STATE = { username: "", password: "" };
@@ -19,6 +19,7 @@ function LoginForm() {
       inputs: formData
     }
     const result = await userAuth(data);
+    console.log(result);
     if (result.success) {
       setFormData(INITIAL_STATE);
       history.push("/jobs");

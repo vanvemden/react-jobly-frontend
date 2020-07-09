@@ -1,4 +1,5 @@
 import React from "react";
+import ApplyButton from "./ApplyButton";
 
 function JobListItem({ title, salary, equity, id }) {
   return (
@@ -11,9 +12,7 @@ function JobListItem({ title, salary, equity, id }) {
         </h6>
         <div>Salary: {salary}</div>
         <div>Equity: {equity}</div>
-        <button className="btn btn-danger font-weight-bold text-uppercase float-right">
-          Apply
-          </button>
+        <ApplyButton id={id} />
       </div>
     </div>
   )

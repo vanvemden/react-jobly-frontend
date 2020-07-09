@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
-import UserAuthContext from "./UserAuthContext";
+import UserAuthContext from "../common/UserAuthContext";
 
 const INITIAL_STATE = {
   username: "",

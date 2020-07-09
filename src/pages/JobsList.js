@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import JobListItem from "./JobListItem";
-import SearchForm from "./SearchForm";
-import JoblyApi from "./JoblyApi";
+import JobListItem from "../common/JobListItem";
+import SearchForm from "../common/SearchForm";
+import JoblyApi from "../common/JoblyApi";
 
 function JobsList() {
   const [searchTerm, setSearchTerm] = useState();

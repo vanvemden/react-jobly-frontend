@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter } from "react-router-dom";
-import JoblyApi from "./JoblyApi";
-import Routes from "./Routes";
-import NavBar from "./NavBar";
-import UserAuthContext from "./UserAuthContext";
+import JoblyApi from "./common/JoblyApi";
+import Routes from "./routes/Routes"
+import NavBar from "./common/NavBar";
+import UserAuthContext from "./common/UserAuthContext";
 import { decode } from 'jsonwebtoken';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,7 +11,8 @@ import './App.css';
 
 function App() {
   const [_token, setToken] = useState(localStorage.getItem("token"));
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState();
+  const [infoLoaded, setInfoLoaded] = useState(false);
 
   useEffect(function loadUserProfile() {
 
@@ -20,15 +21,15 @@ function App() {
         try {
           const { username } = decode(_token);
           let res = await JoblyApi.getUser(username);
-          console.log(res);
           setCurrentUser(res);
         } catch (errors) {
           console.log(errors);
         }
       }
+      setInfoLoaded(true);
     }
     fetchCurrentUser()
-  }, [_token]);
+  }, [_token, setCurrentUser]);
 
   const userAuth = async data => {
     try {
@@ -42,6 +43,28 @@ function App() {
     }
   }
 
+  const updateUserProfile = async (username, data) => {
+    try {
+      await JoblyApi.userProfileUpdate(username, data);
+      const updatedUser = await JoblyApi.getUser(username);
+      setCurrentUser(updatedUser);
+      return { success: true }
+    } catch (errors) {
+      return { success: false, errors };
+    }
+  }
+
+  const updateUserJobs = async id => {
+    console.log("Add this job to user array", id);
+    try {
+      await JoblyApi.userJobApplication(id);
+      const updatedUser = await JoblyApi.getUser(currentUser.username);
+      setCurrentUser(updatedUser);
+    } catch (errors) {
+      console.log(errors);
+    }
+  }
+
   const userLogout = () => {
     localStorage.removeItem("token");
     setToken(false);
@@ -51,10 +74,12 @@ function App() {
     return !!_token;
   }
 
+  if (!infoLoaded) { return "Loading...." }
+
   return (
     <div className="App">
       <BrowserRouter>
-        <UserAuthContext.Provider value={{ currentUser, userAuth, userLogout, isLoggedIn }}>
+        <UserAuthContext.Provider value={{ currentUser, userAuth, userLogout, updateUserProfile, updateUserJobs, isLoggedIn }}>
           <NavBar />
           <div className="col-md-8 offset-md-2">
             <Routes />

@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom"
 import PrivateRoute from "./PrivateRoute";
-import CompaniesList from "./CompaniesList";
-import CompanyDetail from "./CompanyDetail";
-import JobsList from "./JobsList";
-import Auth from "./Auth";
-import UserProfile from "./UserProfile";
-import Homepage from "./Homepage"
+import CompaniesList from "../pages/CompaniesList";
+import CompanyDetail from "../pages/CompanyDetail";
+import JobsList from "../pages/JobsList";
+import Auth from "../common/Auth";
+import UserProfile from "../pages/UserProfile";
+import Homepage from "../pages/Homepage"
 
 
 function Routes() {
