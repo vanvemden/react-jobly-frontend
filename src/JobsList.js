@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import JobListItem from "./JobListItem";
 import SearchForm from "./SearchForm";
 import JoblyApi from "./JoblyApi";
@@ -20,7 +19,7 @@ function JobsList() {
     <div className="JobsList">
       <SearchForm setSearchTerm={setSearchTerm} />
       <h1>Jobs List</h1>
-      <ul>{jobsList.map(c => <li><JobListItem {...c} /></li>)}</ul>
+      <ul>{jobsList.map(c => <li key={c.id}><JobListItem {...c} /></li>)}</ul>
     </div>
   );
 }

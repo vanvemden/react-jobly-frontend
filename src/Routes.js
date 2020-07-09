@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom"
+import React from "react";
+import { Route, Switch } from "react-router-dom"
+import PrivateRoute from "./PrivateRoute";
 import CompaniesList from "./CompaniesList";
 import CompanyDetail from "./CompanyDetail";
 import JobsList from "./JobsList";
@@ -9,27 +10,28 @@ import Homepage from "./Homepage"
 
 
 function Routes() {
+
   return (
     <div className="Routes">
       <Switch>
-        <Route exact path="/companies">
-          <CompaniesList />
-        </Route>
-        <Route exact path="/companies/:handle">
-          <CompanyDetail />
-        </Route>
-        <Route exact path="/jobs">
-          <JobsList />
-        </Route>
         <Route exact path="/login">
           <Auth />
-        </Route>
-        <Route exact path="/profile">
-          <UserProfile />
         </Route>
         <Route exact path="/">
           <Homepage />
         </Route>
+        <PrivateRoute exact path="/companies">
+          <CompaniesList />
+        </PrivateRoute>
+        <PrivateRoute exact path="/companies/:handle">
+          <CompanyDetail />
+        </PrivateRoute>
+        <PrivateRoute exact path="/jobs">
+          <JobsList />
+        </PrivateRoute>
+        <PrivateRoute exact path="/profile">
+          <UserProfile />
+        </PrivateRoute>
       </Switch>
     </div>
   )

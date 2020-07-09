@@ -9,7 +9,6 @@ function CompanyList() {
 
   // call the API
   useEffect(() => {
-    console.log("Fetching new data from API");
     const fetchCompanies = async term => {
       const res = await JoblyApi.getAllCompanies(term);
       setCompaniesList(res);
@@ -21,7 +20,7 @@ function CompanyList() {
     <div className="CompanyList">
       <SearchForm setSearchTerm={setSearchTerm} />
       <h1>Companies List</h1>
-      <ul>{companiesList.map(c => <li><CompanyListItem {...c} /></li>)}</ul>
+      <ul>{companiesList.map(c => <li key={c.handle}><CompanyListItem {...c} /></li>)}</ul>
     </div>
   )
 }

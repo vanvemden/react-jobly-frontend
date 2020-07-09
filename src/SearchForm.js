@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function SearchForm({ setSearchTerm }) {
-  const [term, setTerm] = useState("")
+  const [term, setTerm] = useState("");
 
   const handleSubmit = evt => {
     evt.preventDefault();

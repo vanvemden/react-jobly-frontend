@@ -4,7 +4,6 @@ import JoblyApi from "./JoblyApi";
 import JobListItem from "./JobListItem";
 
 function CompanyDetail() {
-  const [applied, setApplied] = useState(false);
   const [company, setCompany] = useState({ jobs: [] });
 
   const { handle } = useParams();
@@ -15,7 +14,7 @@ function CompanyDetail() {
       setCompany(res);
     }
     fetchCompany(handle);
-  }, [applied]);
+  });
 
   return (
     <div className="CompanyDetail">

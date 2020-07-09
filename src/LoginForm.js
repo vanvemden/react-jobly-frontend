@@ -1,12 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import UserAuthContext from "./UserAuthContext";
+import Alert from "react-bootstrap/Alert";
 
-function LoginForm({ userLogin }) {
+const INITIAL_STATE = { username: "", password: "" };
 
-  const [formData, setFormData] = useState({})
-  const handleSubmit = evt => {
+function LoginForm() {
+
+  const [formData, setFormData] = useState(INITIAL_STATE);
+  const [formErrors, setFormErrors] = useState([]);
+  const { userAuth } = useContext(UserAuthContext);
+  const history = useHistory();
+
+  const handleSubmit = async evt => {
     evt.preventDefault();
-    userLogin(formData);
-    setFormData({});
+    let data = {
+      action: "login",
+      inputs: formData
+    }
+    const result = await userAuth(data);
+    if (result.success) {
+      setFormData(INITIAL_STATE);
+      history.push("/jobs");
+    } else {
+      setFormErrors(result.errors);
+      console.log(result);
+    }
   }
 
   const handleChange = evt => {
@@ -17,7 +36,7 @@ function LoginForm({ userLogin }) {
   return (
     <div className="LoginForm card">
       <div className="card-body">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input type="text"
@@ -36,6 +55,11 @@ function LoginForm({ userLogin }) {
               onChange={handleChange}
               id="password" />
           </div>
+
+          {formErrors.length
+            ? <Alert variant="danger"><ul>{formErrors.map(msg => <li>{msg}</li>)}</ul></Alert>
+            : null}
+
           <button type="submit" className="btn btn-primary float-right">Submit</button>
         </form>
       </div>
