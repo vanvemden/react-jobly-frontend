@@ -48,14 +48,13 @@ function App() {
       await JoblyApi.userProfileUpdate(username, data);
       const updatedUser = await JoblyApi.getUser(username);
       setCurrentUser(updatedUser);
-      return { success: true }
+      return { success: true, messages: ["Profile has been updated"] }
     } catch (errors) {
-      return { success: false, errors };
+      return { success: false, messages: errors };
     }
   }
 
   const updateUserJobs = async id => {
-    console.log("Add this job to user array", id);
     try {
       await JoblyApi.userJobApplication(id);
       const updatedUser = await JoblyApi.getUser(currentUser.username);

@@ -20,7 +20,7 @@ function CompanyList() {
     <div className="CompanyList">
       <SearchForm setSearchTerm={setSearchTerm} />
       <h1>Companies List</h1>
-      <ul>{companiesList.map(c => <li key={c.handle}><CompanyListItem {...c} /></li>)}</ul>
+      {companiesList.map((c, i) => <CompanyListItem key={c.handle} {...c} />)}
     </div>
   )
 }

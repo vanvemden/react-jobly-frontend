@@ -8,14 +8,16 @@ function Homepage() {
   const { isLoggedIn } = useContext(UserAuthContext);
 
   return (
-    <div className="Homepage text-center">
-      <h1>Jobly</h1>
-      <h5>All the jobs in one, convenient place.</h5>
-      {isLoggedIn() ?
-        <h3>Welcome Back!</h3>
-        :
-        <Button variant="primary" as={Link} to="/login">Log in</Button>
-      }
+    <div className="Homepage">
+      <div className="container text-center">
+        <h1>Jobly</h1>
+        <h5>All the jobs in one, convenient place.</h5>
+        {isLoggedIn() ?
+          <h3>Welcome Back!</h3>
+          :
+          <Button variant="primary" as={Link} to="/login">Log in</Button>
+        }
+      </div>
     </div >
   );
 }

@@ -18,8 +18,8 @@ function JobsList() {
   return (
     <div className="JobsList">
       <SearchForm setSearchTerm={setSearchTerm} />
-      <h1>Jobs List</h1>
-      <ul>{jobsList.map(c => <li key={c.id}><JobListItem {...c} /></li>)}</ul>
+      <h1 className="mt-2">Jobs List</h1>
+      {jobsList.map(c => <JobListItem key={c.id} {...c} />)}
     </div>
   );
 }

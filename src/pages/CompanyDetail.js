@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import JoblyApi from "../common/JoblyApi";
 import JobListItem from "../common/JobListItem";
+import Jumbotron from "react-bootstrap/Jumbotron"
 
 function CompanyDetail() {
   const [company, setCompany] = useState({ jobs: [] });
@@ -17,12 +18,12 @@ function CompanyDetail() {
   }, [handle]);
 
   return (
-    <div className="CompanyDetail">
-      <h5 className="text-capitalize">{company.name}</h5>
-      <p>{company.description}</p>
-      <ul>
-        {company.jobs.map(j => <li><JobListItem {...j} /></li>)}
-      </ul>
+    <div className="CompanyDetail my-5">
+      <Jumbotron>
+        <h5 className="text-capitalize">{company.name}</h5>
+        <p>{company.description}</p>
+      </Jumbotron>
+      {company.jobs.map(j => <JobListItem {...j} />)}
     </div>
   )
 }

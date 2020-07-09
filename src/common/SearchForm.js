@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import Form from "react-bootstrap/Form"
+import FormControl from "react-bootstrap/FormControl";
+import Button from "react-bootstrap/Button";
 
 function SearchForm({ setSearchTerm }) {
   const [term, setTerm] = useState("");
@@ -11,20 +14,20 @@ function SearchForm({ setSearchTerm }) {
   const handleChange = evt => {
     const { value } = evt.target;
     setTerm(value);
+    setSearchTerm(value);
   }
 
   return (
-    <div className="SearchForm">
-      <form onSubmit={handleSubmit}>
-        <input
-          id="term"
-          name="term"
-          value={term}
-          placeholder="Enter search term"
-          onChange={handleChange} />
-        <button>Search</button>
-      </form>
-    </div>
+    <Form inline className="SearchForm my-5" onSubmit={handleSubmit}>
+      <FormControl
+        type="text"
+        id="term"
+        name="term"
+        value={term}
+        placeholder="Enter search term"
+        onChange={handleChange} />
+      <Button variant="outline-primary" type="submit">Search</Button>
+    </Form>
   )
 }
 

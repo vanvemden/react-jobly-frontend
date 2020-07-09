@@ -3,7 +3,7 @@ import ApplyButton from "./ApplyButton";
 
 function JobListItem({ title, salary, equity, id }) {
   return (
-    <div className="JobListItem card">
+    <div className="JobListItem card mt-3">
       <div className="card-body">
         <h6 className="card-title d-flex justify-content-between">
           <span className="text-capitalize">
