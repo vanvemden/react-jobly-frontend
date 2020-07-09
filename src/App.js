@@ -11,7 +11,7 @@ import './App.css';
 
 function App() {
   const [_token, setToken] = useState(localStorage.getItem("token"));
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(function loadUserProfile() {
 
@@ -28,7 +28,7 @@ function App() {
       }
     }
     fetchCurrentUser()
-  }, [_token, setCurrentUser]);
+  }, [_token]);
 
   const userAuth = async data => {
     try {
